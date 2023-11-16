@@ -2,7 +2,7 @@ import React from 'react'
 import Login from './component/Login'
 import Mainpage from './component/Mainpage'
 import Signup from './component/Signup'
-import Navbar from './component/Navbar'
+import Navbar from './pages/Navbar'
 
 function App() {
   return (
@@ -15,5 +15,5 @@ function App() {
     </div>
   )
 }
-
+//Documents/React-Projects/React/bloggish
 export default App
