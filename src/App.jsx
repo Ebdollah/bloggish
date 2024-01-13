@@ -5,6 +5,7 @@ import Signup from './component/Signup'
 import Navbar from './pages/Navbar'
 import Footer from './pages/Footer'
 import Contact from './pages/Contact'
+import About from './pages/About'
 import {Routes, Route, Link } from "react-router-dom";
 
 
@@ -15,7 +16,10 @@ function App() {
     <Routes>
     <Route path='/' element={<Mainpage/>}/>
     <Route path='/contactform' element={<Contact/>}/>
-    <Route path='/footer' element={<Footer/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/login' element={<Login/>}/>
+    <Route path='/signup' element={<Signup/>}/>
     </Routes>
     <Footer/>
     </div>
