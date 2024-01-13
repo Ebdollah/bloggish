@@ -4,6 +4,7 @@ import Mainpage from './pages/Mainpage'
 import Signup from './component/Signup'
 import Navbar from './pages/Navbar'
 import Footer from './pages/Footer'
+import Contact from './pages/Contact'
 import {Routes, Route, Link } from "react-router-dom";
 
 
@@ -12,12 +13,9 @@ function App() {
     <div>
     <Navbar/>
     <Routes>
-    {/* <h1 className='text-3xl text-center mt-20 text-red-700'>Bloggish</h1> */}
-    {/* <Login/> */}
-    {/* <Signup/> */}
     <Route path='/' element={<Mainpage/>}/>
-    {/* <Mainpage/> */}
-    {/* <Routes/> */}
+    <Route path='/contactform' element={<Contact/>}/>
+    <Route path='/footer' element={<Footer/>}/>
     </Routes>
     <Footer/>
     </div>

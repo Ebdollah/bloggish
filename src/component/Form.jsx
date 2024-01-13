@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ContactForm() {
+function Form() {
 
     const [inputValue, setInputValue] = useState({
         name: "",
@@ -64,4 +64,4 @@ function ContactForm() {
 
 }
 
-export default ContactForm
+export default Form

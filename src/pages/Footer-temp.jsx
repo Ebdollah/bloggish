@@ -3,7 +3,7 @@ import React from 'react'
 function Footer() {
   return (
     <>
-        <div className=' bg-slate-800'>
+        <div className='h-20 bg-slate-800'>
 
         </div>
     </>
