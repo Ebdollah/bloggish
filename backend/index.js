@@ -1,13 +1,18 @@
 // server.js
 const express = require('express');
 const cors = require('cors');
+const connectDB = require('./db'); 
+const User = require('./models/User');
+const userRoutes = require('./routes/busers');
 // server.js (continued)
 const mongoose = require('mongoose');
+connectDB();
+
 const app = express();
 
-mongoose.connect('mongodb+srv://ebdollah:mern-blog@blog.ojv5asz.mongodb.net/?retryWrites=true&w=majority')
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
+// mongoose.connect('mongodb+srv://ebdollah:mern-blog@blog.ojv5asz.mongodb.net/?retryWrites=true&w=majority')
+// .then(() => console.log('MongoDB connected'))
+// .catch(err => console.log(err));
 
 // Middleware
 app.use(cors());
@@ -18,6 +23,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to the backend!');
 });
 
+app.use('/api/users', userRoutes);
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
