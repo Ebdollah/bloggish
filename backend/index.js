@@ -7,6 +7,8 @@ const userRoutes = require('./routes/busers');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { authenticateToken } = require('./authMiddleware'); // Import the middleware
+
 // server.js (continued)
 const mongoose = require('mongoose');
 connectDB();

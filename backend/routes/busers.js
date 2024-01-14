@@ -6,6 +6,8 @@ const User = require('../models/User'); // Import the User model
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { authenticateToken } = require('../authMiddleware'); // Import the middleware
+
 
 
 // Route to register a new user
@@ -67,6 +69,10 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Failed to login', error: error.message });
     }
+});
+
+router.get('/protected', authenticateToken, (req, res) => {
+  res.json({ success: true, message: 'Protected route', userId: req.user.userId });
 });
 
 // Add more routes as needed (e.g., update user, delete user, etc.)
