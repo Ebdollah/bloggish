@@ -175,3 +175,11 @@ Enter the user details you want to register. For example:
 
 ----------------------------------------------------------------------------
 So now added "handleSubmit" function in signup and login components. checkout pages
+
+
+-------------------------------------------------------------------------
+#Now Set up user authentication using bcryptjs for password hashing and jsonwebtoken for token-based authentication.
+
+const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');

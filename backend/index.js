@@ -4,6 +4,9 @@ const cors = require('cors');
 const connectDB = require('./db'); 
 const User = require('./models/User');
 const userRoutes = require('./routes/busers');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 // server.js (continued)
 const mongoose = require('mongoose');
 connectDB();
