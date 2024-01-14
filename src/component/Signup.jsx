@@ -4,10 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 
+// In the provided code snippet, axios is being imported and used. Axios is a popular JavaScript library that allows you to make HTTP requests from both the front-end and back-end of an application.
+// In the front-end, axios is commonly used to send HTTP requests to a server and retrieve data. It provides a simple and intuitive API for making asynchronous requests, such as GET, POST, PUT, DELETE, etc. This is useful when you need to interact with an API or fetch data from a server. In this case, axios might be used to send a request to a server to create a new user account during the signup process.
+// In the back-end, axios can be used to handle incoming HTTP requests and send responses. It is often used in server-side frameworks like Node.js to make requests to external APIs or perform database operations. For example, if the signup process involves storing user information in a database, axios might be used to send a request to the server's backend to save the user data.
+// Overall, axios simplifies the process of making HTTP requests and handling responses in both the front-end and back-end of an application, making it a popular choice for developers.
+
+
+
 const Signup = () => {
   const navigate = useNavigate();
 
-  
+  //make sure these below 3 fields matches with the backend/database fields
   const [values, setValues] = useState({
     username: "",
     email: "",

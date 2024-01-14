@@ -5,11 +5,9 @@ import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 
 
-const Login = () => {
+const Login = ({onClick}) => {
   const navigate = useNavigate();
 
-
-//   const navigate = useNavigate();
   const [value, setValue] = useState({ email: '', password: '' });
 //
 //
@@ -48,6 +46,7 @@ const Login = () => {
         // Handle successful registration (e.g., navigate to login page)
         if (response.data.message) {
           console.log("Login successful!");
+          onClick=true; 
           navigate('/'); // Navigate to login page after successful registration
         }
   

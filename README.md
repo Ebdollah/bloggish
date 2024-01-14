@@ -172,3 +172,6 @@ Enter the user details you want to register. For example:
   "email": "john.doe@example.com",
   "password": "securePassword123"
 }
+
+----------------------------------------------------------------------------
+So now added "handleSubmit" function in signup and login components. checkout pages
