@@ -12,10 +12,10 @@ const jwt = require('jsonwebtoken');
 router.post('/register', async (req, res) => {
   try {
     //Starting hashing the password
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-      name,
+      username,
       email,
       password: hashedPassword,
     });
@@ -50,12 +50,20 @@ router.post('/login', async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
+        // Compare the entered password with the hashed password
+        const passwordMatch = await bcrypt.compare(password, user.password);
 
-        if (user.password !== password) {
-            return res.status(401).json({ message: 'Invalid password' });
+        if (!passwordMatch) {
+          return res.status(401).json({ message: 'Invalid password' });
         }
+        // if (user.password !== password) {
+        //     return res.status(401).json({ message: 'Invalid password' });
+        // }
+        // If the password is correct, generate a JWT token
+        const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
 
-        res.status(200).json({ message: 'Login successful' });
+
+        res.status(200).json({ message: 'Login successful',token  });
     } catch (error) {
         res.status(500).json({ message: 'Failed to login', error: error.message });
     }
