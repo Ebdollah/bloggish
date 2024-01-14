@@ -11,6 +11,7 @@ router.post('/register', async (req, res) => {
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
+    console.error(error);  // Log the error for debugging
     res.status(500).json({ message: 'Failed to register user', error: error.message });
   }
 });
@@ -28,7 +29,7 @@ router.get('/users', async (req, res) => {
 // backend/routes/users.js
 
 // Route to login a user
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });

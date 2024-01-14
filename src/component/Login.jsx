@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import logo from '../assets/Logo2.png'
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import axios from "axios";
+
 
 const Login = () => {
+  const navigate = useNavigate();
+
 
 //   const navigate = useNavigate();
   const [value, setValue] = useState({ email: '', password: '' });
@@ -34,7 +38,28 @@ const Login = () => {
 
 //   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+      try {
+        // Make POST request to backend to register user
+        const response = await axios.post("http://localhost:5000/api/users/login", value);
   
+        // Handle successful registration (e.g., navigate to login page)
+        if (response.data.message) {
+          console.log("Login successful!");
+          navigate('/'); // Navigate to login page after successful registration
+        }
+  
+        // Handle unsuccessful registration (e.g., validation errors)
+        if (response.data.error) {
+          console.log("Login unsuccessful!");
+          console.log(response.data.error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+  }
   return (
     <>
       <div className="bg-black">
@@ -52,7 +77,7 @@ const Login = () => {
               </Link>
             </div>
 
-            <form >
+            <form onSubmit={handleSubmit}>
               {/* Email input */}
 
               <div className="relative mb-8">

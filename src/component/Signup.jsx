@@ -2,47 +2,67 @@ import React, { useState, useEffect } from "react";
 import logo from "../assets/Logo2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
 
   
   const [values, setValues] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
 
-  
+  // const handleSubmit = async (e) => {
+  //   //setValues({...values, role: 'user'});
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch("http://localhost:5000/api/signup", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         name: values.name,
+  //         email: values.email,
+  //         password: values.password,
+  //       }),
+  //     });
+  //     const data = await response.json();
+
+  //     if (response.ok && data.success) {
+  //       alert("User created successfully");
+  //       navigate("/login");
+  //     } else {
+  //       alert(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
  
-//   const handleSubmit = async (e) => {
-//     //setValues({...values, role: 'user'});
-//     e.preventDefault();
-//     try {
-//       const response = await fetch("http://localhost:5000/api/signup", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           name: values.name,
-//           email: values.email,
-//           password: values.password,
-//         }),
-//       });
-//       const data = await response.json();
+  const a = 19;
 
-//       if (response.ok && data.success) {
-//         alert("User created successfully");
-//         navigate("/login");
-//       } else {
-//         alert(data.message);
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+/////////////////////////
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent default form submission behavior
 
+    try {
+      // Make POST request to backend to register user
+      const response = await axios.post("http://localhost:5000/api/users/register", values);
+
+      // Handle successful registration (e.g., navigate to login page)
+      if (response.data.message) {
+        console.log("Registration successful!");
+        navigate('/login'); // Navigate to login page after successful registration
+      }
+    } catch (error) {
+      // Handle error (e.g., display error message)
+      console.error("Registration failed:", error);
+    }
+}
   return (
     <>
       <div className=" bg-black">
@@ -62,21 +82,21 @@ const Signup = () => {
               </Link>
             </div>
 
-            <form className="grid grid-cols-1 gap-4">
+            <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit}>
               {/*  Name */}
               <div className="relative mb-3">
                 <input
-                  value={values.name}
+                  value={values.username}
                   onChange={(e) =>
-                    setValues({ ...values, name: e.target.value })
+                    setValues({ ...values, username: e.target.value })
                   }
                   type="name"
                   className="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-500 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem]  focus:outline-none peer-focus:text-primary "
-                  id="floatingInput"
+                  // id="floatingInput"
                   placeholder=""
                 />
                 <label
-                  htmFor="floatingInput"
+                  // htmFor="floatingInput"
                   className="pointer-events-none absolute left-0 -top-2 origin-[0_0] border border-solid border-transparent px-3 py-4  text-gray-400 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none"
                 >
                   Full Name
@@ -92,11 +112,11 @@ const Signup = () => {
                   }
                   type="email"
                   className="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-500 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem]  focus:outline-none peer-focus:text-primary "
-                  id="floatingInput"
+                  // id="floatingInput"
                   placeholder="name@example.com"
                 />
                 <label
-                  htmFor="floatingInput"
+                  // htmFor="floatingInput"
                   className="pointer-events-none absolute left-0 -top-2 origin-[0_0] border border-solid border-transparent px-3 py-4  text-gray-400 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none"
                 >
                   Email address
@@ -112,11 +132,11 @@ const Signup = () => {
                   }
                   type="password"
                   className="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-500 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem]  focus:outline-none peer-focus:text-primary "
-                  id="floatingInput"
+                  // id="floatingInput"
                   placeholder="name@example.com"
                 />
                 <label
-                  htmFor="floatingInput"
+                  // htmFor="floatingInput"
                   className="pointer-events-none absolute left-0 -top-2 origin-[0_0] border border-solid border-transparent px-3 py-4  text-gray-400 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none"
                 >
                   Password
