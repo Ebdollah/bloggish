@@ -1,9 +1,27 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import Togglemenu from '../component/Togglemanu'
+import * as jwtDecode from 'jwt-decode';
+
 
 function Navbar() {
   const [isLogin, setIsLogin] = React.useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false); //
+
+  useEffect(() => {
+    // Check for token on page load
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const isTokenExpired = Date.now() >= decodedToken.exp * 1000;
+
+      if (!isTokenExpired) {
+        setIsAuthenticated(true);
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className='flex items-center justify-between rounded-lg h-20 bg-slate-800'>
@@ -26,7 +44,7 @@ function Navbar() {
         </div>
         <div >
           <ul className='flex'>
-            {isLogin ?
+            {isLogin && isAuthenticated ?
             (
               <>
                 <li>
@@ -36,7 +54,7 @@ function Navbar() {
             ):(
               <>
                 <li>
-                  <Link to='/login' onClick={setIsLogin} className='text-lg rounded-lg p-2 bg-slate-900 m-2 hover:border px-4 text-stone-100 hover:text-stone-200'>Login</Link>
+                  <Link to='/login' onClick={setIsLogin}  className='text-lg rounded-lg p-2 bg-slate-900 m-2 hover:border px-4 text-stone-100 hover:text-stone-200'>Login</Link>
                 </li>
                 <li>
                   <Link to='/signup' className='text-lg rounded-lg p-2 bg-slate-900 m-2 hover:border px-4 text-stone-100 hover:text-stone-200'>Signup</Link>

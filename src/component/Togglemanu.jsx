@@ -7,9 +7,18 @@ function Togglemenu({onClik}) {
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
     };
+    // const handleLogout = () => {
+    //   // Clear token on logout
+    //   localStorage.removeItem('token');
+    //   setIsAuthenticated(false);
+    //   navigate('/'); // Redirect to home or login page
+    // };
+
     const navigate = useNavigate();
     const handleClick = () => {
         console.log(onClik);
+        localStorage.removeItem('token');
+        // setIsAuthenticated(false);
         onClik(false);
         navigate('/');
     }

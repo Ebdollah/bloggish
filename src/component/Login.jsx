@@ -46,6 +46,9 @@ const Login = ({onClick}) => {
         // Handle successful registration (e.g., navigate to login page)
         if (response.data.message) {
           console.log("Login successful!");
+          // Inside your login component after successful login
+           localStorage.setItem('token', response.data.token);
+
           onClick=true; 
           navigate('/'); // Navigate to login page after successful registration
         }
