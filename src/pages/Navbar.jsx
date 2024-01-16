@@ -1,26 +1,45 @@
 import React,{useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import Togglemenu from '../component/Togglemanu'
-import * as jwtDecode from 'jwt-decode';
+// import * as jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+
 
 
 function Navbar() {
   const [isLogin, setIsLogin] = React.useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false); //
 
+  
   useEffect(() => {
     // Check for token on page load
     const token = localStorage.getItem('token');
-
+    alert(token)
     if (token) {
-      const decodedToken = jwtDecode(token);
-      const isTokenExpired = Date.now() >= decodedToken.exp * 1000;
-
-      if (!isTokenExpired) {
-        setIsAuthenticated(true);
+      try {
+        const decoded = jwtDecode(token);
+        console.log(decoded)
+        const isTokenExpired = Date.now() >= decoded.exp * 1000;
+  
+        if (!isTokenExpired) {
+          setIsAuthenticated(true);
+        } else {
+          // Token expired, clear it from local storage
+          localStorage.removeItem('token');
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        // Handle the error as needed
       }
+    } else {
+      // No token found
+      setIsAuthenticated(false);
     }
-  }, []);
+  },[isLogin]);
+
+  
+  
 
   return (
     <>
@@ -48,13 +67,13 @@ function Navbar() {
             (
               <>
                 <li>
-                  <Togglemenu onClik={setIsLogin}/>
+                  <Togglemenu setIsLogin={setIsLogin}/>
                 </li>
               </>
             ):(
               <>
                 <li>
-                  <Link to='/login' onClick={setIsLogin}  className='text-lg rounded-lg p-2 bg-slate-900 m-2 hover:border px-4 text-stone-100 hover:text-stone-200'>Login</Link>
+                  <Link to='/login' setIsLogin={setIsLogin}  className='text-lg rounded-lg p-2 bg-slate-900 m-2 hover:border px-4 text-stone-100 hover:text-stone-200'>Login</Link>
                 </li>
                 <li>
                   <Link to='/signup' className='text-lg rounded-lg p-2 bg-slate-900 m-2 hover:border px-4 text-stone-100 hover:text-stone-200'>Signup</Link>

@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {FaUser} from 'react-icons/fa'
 import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-function Togglemenu({onClik}) {
+
+function Togglemenu({setIsLogin}) {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
@@ -16,10 +18,10 @@ function Togglemenu({onClik}) {
 
     const navigate = useNavigate();
     const handleClick = () => {
-        console.log(onClik);
+        console.log(setIsLogin);
         localStorage.removeItem('token');
         // setIsAuthenticated(false);
-        onClik(false);
+        setIsLogin(false);
         navigate('/');
     }
     // Other code...

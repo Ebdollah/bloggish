@@ -5,7 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 
 
-const Login = ({onClick}) => {
+const Login = ({setIsLogin}) => {
   const navigate = useNavigate();
 
   const [value, setValue] = useState({ email: '', password: '' });
@@ -49,8 +49,9 @@ const Login = ({onClick}) => {
           // Inside your login component after successful login
            localStorage.setItem('token', response.data.token);
 
-          onClick=true; 
-          navigate('/'); // Navigate to login page after successful registration
+          setIsLogin=true; 
+          navigate('/', { state: { reload: true } });
+          // Navigate to login page after successful registration
         }
   
         // Handle unsuccessful registration (e.g., validation errors)
