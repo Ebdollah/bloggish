@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./db'); 
 const User = require('./models/User');
 const userRoutes = require('./routes/busers');
+const blogRoutes = require('./routes/blogcont')
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -29,6 +30,7 @@ app.use(express.json());
 // });
 
 app.use('/api/users', userRoutes);
+app.use('/api/blog',blogRoutes);
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

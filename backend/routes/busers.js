@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User'); // Import the User model
+const Blog = require('../models/Blog')
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -28,6 +29,21 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     console.error(error);  // Log the error for debugging
     res.status(500).json({ message: 'Failed to register user', error: error.message });
+  }
+});// implemented Hashing the password
+
+router.post('/cblog', async (req, res) => {
+  try {
+    //Starting hashing the password
+    // const { title, category, blog } = req.body;
+    const newBlog = new Blog(req.body);
+
+    // const newUser = new User(req.body);
+    await newBlog.save();
+    res.status(201).json({ message: 'Blog registered successfully' });
+  } catch (error) {
+    console.error(error);  // Log the error for debugging
+    res.status(500).json({ message: 'Failed to register Blog', error: error.message });
   }
 });// implemented Hashing the password
 

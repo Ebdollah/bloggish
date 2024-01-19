@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function BlogForms() {
   const [inputValue, setInputValue] = useState({
@@ -18,10 +20,22 @@ function BlogForms() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add logic for submitting the form, for example, sending data to a server
-    console.log('Form submitted:', inputValue);
+  const handleSubmit = async(e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    try {
+      // Make POST request to backend to register user
+      const response = await axios.post("http://localhost:5000/api/blog/cblog", inputValue);
+
+      // Handle successful registration (e.g., navigate to login page)
+      if (response.data.message) {
+        console.log("Blog Added");
+        navigate('/login'); // Navigate to login page after successful registration
+      }
+    } catch (error) {
+      // Handle error (e.g., display error message)
+      console.error("Blog failed:", error);
+    }
   };
 
   return (
