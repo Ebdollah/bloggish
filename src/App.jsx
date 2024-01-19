@@ -7,20 +7,26 @@ import Footer from './pages/Footer'
 import Contact from './pages/Contact'
 import About from './pages/About'
 import {Routes, Route, Link } from "react-router-dom";
+import BlogForms from './component/BlogForms'
+import Blog from './component/Blog'
+import BlogPage from './pages/BlogPage'
 
 
 function App() {
   return (
     <div>
     <Navbar/>
-    <Routes>
+    <BlogPage />
+    {/* <Routes>
     <Route path='/' element={<Mainpage/>}/>
     <Route path='/contactform' element={<Contact/>}/>
     <Route path='/about' element={<About/>}/>
     <Route path='/contact' element={<Contact/>}/>
+    <Route path='/createblog' element={<BlogForms/>}/>
+    <Route path='/blog' element={<Blog />}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
-    </Routes>
+    </Routes> */}
     <Footer/>
     </div>
   )

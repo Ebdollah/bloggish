@@ -14,7 +14,7 @@ function Navbar() {
   useEffect(() => {
     // Check for token on page load
     const token = localStorage.getItem('token');
-    alert(token)
+    // alert(token)
     if (token) {
       try {
         const decoded = jwtDecode(token);
