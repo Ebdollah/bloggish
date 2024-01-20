@@ -83,12 +83,17 @@ router.post('/login', async (req, res) => {
 
         res.status(200).json({ message: 'Login successful',token  });
     } catch (error) {
+        console.log("Failed-login")
         res.status(500).json({ message: 'Failed to login', error: error.message });
     }
 });
 
 router.get('/protected', authenticateToken, (req, res) => {
-  res.json({ success: true, message: 'Protected route', userId: req.user.userId });
+  if (req.user) {
+    res.json({ success: true, message: 'Protected route', userId: req.user.userId });
+  } else {
+    res.status(403).json({ message: 'Unauthorized' });
+  }
 });
 
 // Add more routes as needed (e.g., update user, delete user, etc.)

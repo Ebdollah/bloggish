@@ -35,12 +35,7 @@ function BlogPage() {
         ))
         : "Loading..."}
 
-      {/* {data.map((item) => (
-        <div key={item._id.$oid}>
-          <h2>{item.title}</h2>
-          <p>{item.body}</p>
-        </div>
-      ))} */}
+      
     </div>
   );
 }

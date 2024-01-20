@@ -3,66 +3,36 @@ import logo from '../assets/Logo2.png'
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
+import { useAuth } from './AuthContext';
 
 
 const Login = ({setIsLogin}) => {
+  const {login} = useAuth();
   const navigate = useNavigate();
 
   const [value, setValue] = useState({ email: '', password: '' });
-//
-//
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try{
-//       const response = await fetch('http://localhost:5000/api/login', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(value)
-//       })
-//       const data = await response.json();
-//       if(response.ok && data.success){
-//         localStorage.setItem('token', data.token)
-//         localStorage.setItem('role', data.role)
-//         navigate('/main');
-     
-      
-//       }
-//     }
-//     catch(err){
-//       console.log(err)
-//     }
 
-//   }
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+  try {
+    const response = await axios.post("http://localhost:5000/api/users/login", value);
 
-      try {
-        // Make POST request to backend to register user
-        const response = await axios.post("http://localhost:5000/api/users/login", value);
-  
-        // Handle successful registration (e.g., navigate to login page)
-        if (response.data.message) {
-          console.log("Login successful!");
-          // Inside your login component after successful login
-           localStorage.setItem('token', response.data.token);
+    if (response.data.message) {
+      console.log("Login successful!");
+      login();  // Set the login state
+      navigate('/');  // Navigate to the main page or any other desired page
+    }
 
-          setIsLogin=true; 
-          navigate('/', { state: { reload: true } });
-          // Navigate to login page after successful registration
-        }
-  
-        // Handle unsuccessful registration (e.g., validation errors)
-        if (response.data.error) {
-          console.log("Login unsuccessful!");
-          console.log(response.data.error);
-        }
-      } catch (error) {
-        console.log(error);
-      }
+    if (response.data.error) {
+      console.log("Login unsuccessful!");
+      console.log(response.data.error);
+    }
+  } catch (error) {
+    console.log("Login un");
+    console.log(error);
   }
+};
   return (
     <>
       <div className="bg-black">
@@ -76,7 +46,7 @@ const Login = ({setIsLogin}) => {
           <div className="max-w-md w-full mx-auto p-8 rounded-lg shadow-lg bg-white">
             <div className="flex items-center justify-center">
               <Link to='/'>
-                <img src={logo} alt="Logo" className="w-40 h-auto mb-10" />
+                <img src={"#"} alt="Logo" className="w-40 h-auto mb-10" />
               </Link>
             </div>
 
