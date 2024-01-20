@@ -3,7 +3,7 @@ import Form from '../component/Form'
 
 function Contact() {
   return (
-    <div className='rounded-lg'>
+    <div className='rounded-lg pb-10'>
         <h1 className='flex justify-center text-6xl text-stone-700 mt-5'>Contact me</h1>
         <div className='flex justify-center space-x-10 mt-8'>
           <div>

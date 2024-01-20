@@ -35,7 +35,9 @@ function Togglemenu({ setIsLogin }) {
       {/* Your component content... */}
 
 
-      <div className="fixed top-20 right-1 w-48 h-52 bg-white p-4 rounded-lg shadow-md">
+     {
+      isVisible &&  (
+        <div className="fixed top-20 right-1 w-48 h-52 bg-white p-4 rounded-lg shadow-md">
         <div className="flex justify-center items-center mt-4 w-full max-w-2xl bg-slate-100 hover:bg-slate-300  p-4 rounded-lg shadow-md ">
           <button>Account Settings</button>
         </div>
@@ -43,11 +45,13 @@ function Togglemenu({ setIsLogin }) {
           <button onClick={logout}>Sign out</button>
         </div>
       </div>
+      )
+     }
 
 
       {/* Your button or trigger for the pop-up */}
-      <button onClick={toggleVisibility} className="focus:outline-none hover:border hover:rounded-2xl p-1.5">
-        <FaUser size={32} color="blue" />
+      <button onClick={toggleVisibility} className="focus:outline-none hover:border fill-slate-900 hover:rounded-2xl p-1.5 mr-[2.5rem]">
+        <FaUser size={32} color='white' className='bg-slate-900 p-1 rounded-lg w-14 h-9 ' />
       </button>
     </div>
   );
